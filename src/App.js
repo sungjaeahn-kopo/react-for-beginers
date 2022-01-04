@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import EventPractice from './EventPractice';
+// import logo from './logo.svg';
+// import './App.css';
+// import EventPractice from './EventPractice';
 import TodoTemplate from './components/TodoTemplate';
 import TodoInsert from './components/TodoInsert';
 import TodoList from './components/TodoList';
@@ -61,7 +61,7 @@ const App = () => {
 
   return (
     <TodoTemplate>
-      <TodoInsert/>
+      <TodoInsert />
       <TodoList todo={todos}/>
     </TodoTemplate>
   );

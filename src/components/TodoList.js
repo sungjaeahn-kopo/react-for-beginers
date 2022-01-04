@@ -7,11 +7,8 @@ import './TodoList.scss';
 // todo 데이터는 통째로 props로 전달 (이후 성능최적화에 용이)
 const TodoList = ({ todos }) => {
     return (
-        <div className='TodoList'>
-            {/* <TodoListItem/>
-            <TodoListItem/>
-            <TodoListItem/> */}
-            {todos.map(todo => (
+        <div className="TodoList">
+            {todos && todos.map(todo => (
                 <TodoListItem todo={todo} key={todo.id}/>
             ))}
         </div>
