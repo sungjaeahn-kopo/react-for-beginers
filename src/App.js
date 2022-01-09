@@ -64,13 +64,6 @@ const App = () => {
     },
   ]);
 
-  const onRemove = useCallback(
-    id => {
-      setTodos(todos.filter(todo => todo.id !== id));
-    },
-    [todos],
-  );
-
   // 고윳값으로 사용될 id
   // ref 사용해서 변수 담기
   const nextId = useRef(4);
@@ -85,6 +78,24 @@ const App = () => {
 
       setTodos(todos.concat(todo));
       nextId.current += 1;
+    },
+    [todos],
+  );
+
+  const onRemove = useCallback(
+    (id) => {
+      setTodos(todos.filter((todo) => todo.id !== id));
+    },
+    [todos],
+  );
+
+  const onToggle = useCallback(
+    (id) => {
+      setTodos(
+        todos.map((todo) =>
+          todo.id == id ? {...todo, checked: !todo.checked} : todo,
+        ),
+      );
     },
     [todos],
   );
