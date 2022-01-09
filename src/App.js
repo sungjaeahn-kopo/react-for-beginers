@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 // import logo from './logo.svg';
 // import './App.css';
 // import EventPractice from './EventPractice';
@@ -57,12 +57,42 @@ const App = () => {
       text : '일정관리 앱 만들어 보기',
       checked : false,
     },
+    {
+      id : 4,
+      text : '일정관리 앱 만들어 보기22',
+      checked : false,
+    },
   ]);
+
+  const onRemove = useCallback(
+    id => {
+      setTodos(todos.filter(todo => todo.id !== id));
+    },
+    [todos],
+  );
+
+  // 고윳값으로 사용될 id
+  // ref 사용해서 변수 담기
+  const nextId = useRef(4);
+
+  const onInsert = useCallback(
+    text => {
+      const todo = {
+        id : nextId.current,
+        text,
+        checked : false,
+      };
+
+      setTodos(todos.concat(todo));
+      nextId.current += 1;
+    },
+    [todos],
+  );
 
   return (
     <TodoTemplate>
-      <TodoInsert />
-      <TodoList todo={todos}/>
+      <TodoInsert onInsert={onInsert}/>
+      <TodoList todos={todos} onRemove={onRemove}/>
     </TodoTemplate>
   );
 };
