@@ -23,7 +23,7 @@ import TodoList from './components/TodoList';
 //           Learn React
 //         </a>
 //       </header>
-//     </div>                                                                   
+//     </div>
 //   );
 // }
 
@@ -39,41 +39,33 @@ import TodoList from './components/TodoList';
 //   );
 // };
 
+function createBuilkTodos() {
+  const array = [];
+  for (let i = 1; i <= 2500; i++) {
+    array.push({
+      id: i,
+      text: `할 일 ${i}`,
+      checked: false,
+    });
+  }
+  return array;
+}
+
 const App = () => {
   // todos 상태 사용
-  const [todos, setTodos] = useState([
-    {
-      id : 1,
-      text : '리액트의 기초를 알아보자',
-      checked : true,
-    },
-    {
-      id : 2,
-      text : '컴포넌트 스타일링 해보기',
-      checked : true,
-    },
-    {
-      id : 3,
-      text : '일정관리 앱 만들어 보기',
-      checked : false,
-    },
-    {
-      id : 4,
-      text : '일정관리 앱 만들어 보기22',
-      checked : false,
-    },
-  ]);
+  // 함수 형태가 아닌 파라미터 형태로 넣으면 첫 랜더링떄만 함수실행
+  const [todos, setTodos] = useState(createBuilkTodos);
 
   // 고윳값으로 사용될 id
   // ref 사용해서 변수 담기
-  const nextId = useRef(4);
+  const nextId = useRef(2501);
 
   const onInsert = useCallback(
-    text => {
+    (text) => {
       const todo = {
-        id : nextId.current,
+        id: nextId.current,
         text,
-        checked : false,
+        checked: false,
       };
 
       setTodos(todos.concat(todo));
@@ -93,7 +85,7 @@ const App = () => {
     (id) => {
       setTodos(
         todos.map((todo) =>
-          todo.id == id ? {...todo, checked: !todo.checked} : todo,
+          todo.id === id ? { ...todo, checked: !todo.checked } : todo,
         ),
       );
     },
@@ -102,8 +94,8 @@ const App = () => {
 
   return (
     <TodoTemplate>
-      <TodoInsert onInsert={onInsert}/>
-      <TodoList todos={todos} onRemove={onRemove}/>
+      <TodoInsert onInsert={onInsert} />
+      <TodoList todos={todos} onRemove={onRemove} onToggle={onToggle} />
     </TodoTemplate>
   );
 };
