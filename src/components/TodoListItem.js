@@ -34,4 +34,5 @@ const TodoListItem = ({ todo, onRemove, onToggle }) => {
 };
 
 // React.memo 사용으로 변경된 컴포넌트(todo, onRemove, onToggle)만 리랜더링되게 함
+
 export default React.memo(TodoListItem);
