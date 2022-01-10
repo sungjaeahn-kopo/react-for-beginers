@@ -1,2 +1,2 @@
 before<br>
-<img src="./img/performance.png"/>
+<img src="./img/performance.PNG"/>
