@@ -13,5 +13,8 @@
   '할 일2' ~ '할 일2500'은 불필요한 rerendering됨 <br>
   
   => 성능 최적화 필요
+<br><br>
   
+  <h1>after<h1>
+    <img src="./img/performance_after.PNG"/>
   
