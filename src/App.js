@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useRef, useReducer } from 'react';
 // import logo from './logo.svg';
 // import './App.css';
 // import EventPractice from './EventPractice';
@@ -51,14 +51,36 @@ function createBuilkTodos() {
   return array;
 }
 
+function todoReducer(todos, action) {
+  switch (action.type) {
+    case 'INSERT': // 새로추가
+      // {type : 'INSERT', todo : {id : 1, text : 'todo', checked : false}}
+      return todos.concat(action.todo);
+    case 'REMOVE': // 새로추가
+      // {type : 'INSERT', todo : {id : 1, text : 'todo', checked : false}}
+      return todos.filter((todo) => todo.id !== action.id);
+    case 'TOGGLE': // 새로추가
+      // {type : 'INSERT', todo : {id : 1, text : 'todo', checked : false}}
+      return todos.map((todo) =>
+        todo.id === action.id ? { ...todo, checked: !todo.checked } : todo,
+      );
+    default:
+      return todos;
+  }
+}
+
 const App = () => {
   // todos 상태 사용
   // 함수 형태가 아닌 파라미터 형태로 넣으면 첫 랜더링떄만 함수실행
-  const [todos, setTodos] = useState(createBuilkTodos);
+  const [todos, dispatch] = useReducer(
+    todoReducer,
+    undefined,
+    createBuilkTodos,
+  );
 
   // 고윳값으로 사용될 id
   // ref 사용해서 변수 담기
-  const nextId = useRef(4);
+  const nextId = useRef(2501);
 
   const onInsert = useCallback((text) => {
     const todo = {
@@ -67,20 +89,16 @@ const App = () => {
       checked: false,
     };
 
-    setTodos((todos) => todos.concat(todo));
+    dispatch({ type: 'INSERT', todo });
     nextId.current += 1;
   }, []);
 
   const onRemove = useCallback((id) => {
-    setTodos((todos) => todos.filter((todo) => todo.id !== id));
+    dispatch({ type: 'REMOVE', id });
   }, []);
 
   const onToggle = useCallback((id) => {
-    setTodos((todos) =>
-      todos.map((todo) =>
-        todo.id === id ? { ...todo, checked: !todo.checked } : todo,
-      ),
-    );
+    dispatch({ type: 'TOGGLE', id });
   }, []);
 
   return (
