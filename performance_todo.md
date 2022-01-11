@@ -17,9 +17,7 @@
   
   <h1>after<h1>
     <img src="./img/performance_after.PNG"/>
-    <br><br>
-    
-    
+    <br><br>        
     <h1>after02_using react-virtualized</h1>
     <img src="./img/performance_after02.PNG"/>
   
