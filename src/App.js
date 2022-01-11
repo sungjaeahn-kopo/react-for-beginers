@@ -39,6 +39,11 @@ import TodoList from './components/TodoList';
 //   );
 // };
 
+// 불변성
+// 내부의 값 변화를 감지하면 React.memo 사용시 리랜더링 성능향상
+// const nextArray1 = array; 배열 복사가 아닌 동일한 배열을 가리킴
+// const nextArray2 = [...array]; 배열 내부의 값을 모두 복사, shallow copy
+
 function createBuilkTodos() {
   const array = [];
   for (let i = 1; i <= 2500; i++) {

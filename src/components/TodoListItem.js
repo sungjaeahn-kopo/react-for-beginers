@@ -7,7 +7,7 @@ import {
 import cn from 'classnames';
 import './TodoListItem.scss';
 
-const TodoListItem = ({ todo, onRemove, onToggle }) => {
+const TodoListItem = ({ todo, onRemove, onToggle, style }) => {
   const { id, text, checked } = todo;
   // return (
   //     <div className='TodoListItem'>
@@ -21,13 +21,18 @@ const TodoListItem = ({ todo, onRemove, onToggle }) => {
   //     </div>
   // );
   return (
-    <div className="TodoListItem">
-      <div className={cn('checkbox', { checked })} onClick={() => onToggle(id)}>
-        {checked ? <MdCheckBox /> : <MdCheckBoxOutlineBlank />}
-        <div className="text">{text}</div>
-      </div>
-      <div className="remove" onClick={() => onRemove(id)}>
-        <MdRemoveCircleOutline />
+    <div className="TodoListItem-virtualized" style={style}>
+      <div className="TodoListItem">
+        <div
+          className={cn('checkbox', { checked })}
+          onClick={() => onToggle(id)}
+        >
+          {checked ? <MdCheckBox /> : <MdCheckBoxOutlineBlank />}
+          <div className="text">{text}</div>
+        </div>
+        <div className="remove" onClick={() => onRemove(id)}>
+          <MdRemoveCircleOutline />
+        </div>
       </div>
     </div>
   );
@@ -35,4 +40,7 @@ const TodoListItem = ({ todo, onRemove, onToggle }) => {
 
 // React.memo 사용으로 변경된 컴포넌트(todo, onRemove, onToggle)만 리랜더링되게 함
 
-export default React.memo(TodoListItem);
+export default React.memo(
+  TodoListItem,
+  (preProps, nextProps) => preProps.todo === nextProps.todo,
+);
