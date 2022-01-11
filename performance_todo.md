@@ -1,4 +1,4 @@
-<h1>before<h1>
+<h1 style="color : blue">Before<h1>
 <img src="./img/performance.PNG"/>
 <br>
   <h3>느려지는 원인분석</h3>
@@ -15,9 +15,9 @@
   => 성능 최적화 필요
 <br><br>
   
-  <h1>after<h1>
+  <h1 style="color : blue">After<h1>
     <img src="./img/performance_after.PNG"/>
     <br><br>        
-    <h1>after02_using react-virtualized</h1>
-    <img src="./img/performance_after02.PNG"/>
+  <h1 style="color : blue">After02_using react-virtualized</h1>
+  <img src="./img/performance_after02.PNG"/>
   
